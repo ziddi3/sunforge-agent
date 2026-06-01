@@ -1,0 +1,15 @@
+{
+  "id": "ecosystem-demo-001",
+  "name": "Sanitized Builder Ecosystem",
+  "description": "A safe public demo dataset representing a builder managing private source repositories, public deployments, documentation, and release tasks.",
+  "privacy_model": "private-source-public-demo",
+  "primary_goal": "Audit architecture drift and create the next build plan.",
+  "system_layers": [
+    "world-shell",
+    "surface-dashboard",
+    "public-hub",
+    "private-library",
+    "container-apps",
+    "artifact-vault"
+  ]
+}
