@@ -1,0 +1,26 @@
+[
+  {
+    "id": "rule-public-demo-sanitized",
+    "type": "privacy",
+    "severity": "critical",
+    "rule": "Public demo repositories may contain sanitized metadata, mock records, docs, and demo code only."
+  },
+  {
+    "id": "rule-private-ledger-stays-private",
+    "type": "privacy",
+    "severity": "critical",
+    "rule": "Private architecture ledgers, internal process notes, client records, and protected implementation details must stay outside public demo repositories."
+  },
+  {
+    "id": "rule-frontend-backend-split",
+    "type": "deployment",
+    "severity": "medium",
+    "rule": "Frontend deployments should map to public web hosts. Backend services should map to API hosts. Domain records should clearly identify which service they point to."
+  },
+  {
+    "id": "rule-detect-repo-role-drift",
+    "type": "architecture",
+    "severity": "high",
+    "rule": "Flag repositories that are carrying responsibilities outside their intended role."
+  }
+]
