@@ -1,0 +1,52 @@
+[
+  {
+    "id": "repo-public-demo",
+    "name": "sunforge-agent",
+    "visibility": "public",
+    "intended_role": "public-demo-shell",
+    "current_responsibilities": [
+      "demo dashboard",
+      "sanitized metadata",
+      "agent workflow docs",
+      "hackathon submission materials"
+    ],
+    "risk_level": "low"
+  },
+  {
+    "id": "repo-private-library",
+    "name": "private-library-example",
+    "visibility": "private",
+    "intended_role": "private-source-ledger",
+    "current_responsibilities": [
+      "architecture ledgers",
+      "internal notes",
+      "private canon",
+      "source records"
+    ],
+    "risk_level": "high-if-public"
+  },
+  {
+    "id": "repo-public-hub",
+    "name": "public-hub-example",
+    "visibility": "private",
+    "intended_role": "public-hub-frontend",
+    "current_responsibilities": [
+      "frontend portal",
+      "container registry",
+      "deployment links"
+    ],
+    "risk_level": "medium"
+  },
+  {
+    "id": "repo-container-app",
+    "name": "container-app-example",
+    "visibility": "private",
+    "intended_role": "business-container-app",
+    "current_responsibilities": [
+      "backend API",
+      "customer workflow",
+      "service-specific dashboard"
+    ],
+    "risk_level": "medium"
+  }
+]
