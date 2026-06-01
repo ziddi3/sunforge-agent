@@ -1,0 +1,29 @@
+[
+  {
+    "id": "deploy-frontend-001",
+    "repo_id": "repo-public-hub",
+    "platform": "Vercel",
+    "type": "frontend",
+    "domain_pattern": "subdomain.methodz.ca",
+    "status": "active",
+    "public": true
+  },
+  {
+    "id": "deploy-backend-001",
+    "repo_id": "repo-container-app",
+    "platform": "Render",
+    "type": "backend",
+    "domain_pattern": "api-subdomain.methodz.ca",
+    "status": "active",
+    "public": false
+  },
+  {
+    "id": "deploy-demo-001",
+    "repo_id": "repo-public-demo",
+    "platform": "Cloud Run",
+    "type": "hackathon-demo",
+    "domain_pattern": "temporary-demo-url",
+    "status": "planned",
+    "public": true
+  }
+]
