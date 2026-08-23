@@ -1,11 +1,14 @@
 {
   "name": "sunforge-agent-backend",
-  "version": "0.1.0",
-  "description": "Demo backend for SunForge Agent ecosystem audits.",
+  "version": "1.0.0",
+  "description": "SunForge — Methodz/Nexus ecosystem audit and intelligence layer",
   "type": "module",
+  "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "node server.js"
+    "dev": "node server.js",
+    "test": "node --test ../../tests/*.test.js",
+    "audit": "node -e \"import('./lib/audit-engine.js').then(m => m.createAuditRun({root: process.cwd() + '/../..'}).then(r => console.log(JSON.stringify(r, null, 2))))\""
   },
   "license": "MIT",
   "engines": {
