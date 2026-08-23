@@ -1,53 +1,59 @@
 # Architecture
 
-SunForge Agent is a public demo shell for a project intelligence agent.
+SunForge is the ecosystem audit/intelligence layer for Methodz / Nexus.
 
-It is designed to audit complex builder ecosystems without exposing private production repositories.
+## Authority
 
-## High-Level Flow
-
-```text
-Builder Dashboard
-  -> Backend API
-    -> Google Cloud Agent Builder
-      -> Gemini reasoning
-        -> MongoDB MCP tools
-          -> MongoDB project memory
+```
+Nexus Canon        → defines meaning
+Registry           → records declared / observed ecosystem state
+SunForge           → audits, correlates, detects drift, generates intelligence
+Nexus              → routes
+Containers         → operate
 ```
 
-## Data Model
+SunForge may recommend changes. It must not silently redefine canonical architecture.
 
-MongoDB collections planned for the demo:
+## High-Level Flow (v0.3)
+
+```
+Dashboard (frontend)
+  → Backend API (/api/audit, /health)
+    → Observation (sample data or future live sources)
+    → Analysis (rules engine)
+    → Recommendation (tasks, readiness)
+    → Action = none (READ-ONLY)
+```
+
+## Data Model (demo)
 
 - ecosystems
 - repositories
 - deployments
-- documents
-- assets
 - audit_rules
 - findings
 - tasks
-- audit_reports
+- audit_reports (via run metadata)
 
 ## Core Concept
 
-The agent treats a builder's workspace as a connected graph:
+Treat the builder workspace as a connected graph:
 
-```text
-repository -> deployment -> domain -> project layer -> task -> audit report
+```
+repository → deployment → domain → project layer → task → audit report
 ```
 
-This allows it to detect mismatches such as:
+Detect mismatches such as:
 
-- a public demo repo containing private-style responsibilities
-- a frontend repo missing its deployment record
-- a backend service with no linked domain
-- a documentation repo carrying product code responsibilities
-- a private source repo being mistaken for public demo material
+- public demo repo containing private-style responsibilities
+- frontend repo missing deployment record
+- backend service with no linked domain
+- documentation / library repo carrying product code responsibilities
+- private source repo mistaken for public demo material
 
 ## Public Demo Boundary
 
-The public repo only contains:
+This repository contains:
 
 - sanitized sample metadata
 - demo workflows
@@ -55,4 +61,8 @@ The public repo only contains:
 - sample audit outputs
 - lightweight frontend/backend shell code
 
-Private repositories, protected implementation details, and internal ledgers remain outside the public submission.
+Private repositories, protected implementation details, and internal ledgers remain outside the public surface.
+
+## Continuity
+
+This is archaeological recovery of the original hackathon shell, not a rewrite. The rules engine logic is preserved and versioned (0.2 → 0.3). Run metadata and explicit observation/analysis/recommendation separation were added so future builders can reproduce every audit.

@@ -1,107 +1,87 @@
 # SunForge Agent
 
-**SunForge Agent** is a Gemini-powered project intelligence agent for builders who manage complex work across private repositories, deployed services, documents, assets, and release plans.
+**SunForge** is the Methodz / Nexus ecosystem audit and intelligence layer.
 
-The public hackathon repo contains a safe demo shell with sanitized sample metadata. It does **not** expose private source code, private canon, client data, production secrets, or internal deployment credentials.
+It discovers repositories and deployments, inventories the ecosystem, classifies components, maps relationships, compares implementation against declared architecture (Nexus Canon + Ecosystem Registry), detects drift, orphaned services, duplicate/divergent implementations, missing documentation, deployment/domain mismatches, and generates evidence-backed audit reports and prioritized recovery/build plans.
 
-## Hackathon Track
+## Architectural Role
 
-**MongoDB MCP Track**
-
-## Problem
-
-Modern builders often work across many disconnected systems:
-
-- private GitHub repositories
-- public frontend deployments
-- backend services
-- custom domains and subdomains
-- notes and architecture documents
-- creative assets
-- product tasks
-- release checklists
-
-Traditional project tools can track tickets and files, but they do not understand how a story document, a repository, a deployment, a domain, and a release task relate to each other.
-
-## Solution
-
-SunForge Agent audits a builder's project ecosystem as a connected operational graph.
-
-It can:
-
-- map repositories to deployments
-- classify components by role
-- detect repo-role drift
-- separate private/internal material from public/demo material
-- identify missing build tasks
-- generate release readiness reports
-- create next-step implementation plans
-- store audit results in MongoDB through MCP-backed project memory
-
-## Demo Mission
-
-> Audit this project ecosystem and create the next build plan.
-
-The agent reads sanitized sample metadata, identifies architectural drift, flags privacy boundaries, and returns an actionable build plan.
-
-## Example Output
-
-```json
-{
-  "audit_status": "needs_attention",
-  "findings": [
-    "methodz-library is carrying private source material and public prototype responsibilities",
-    "method-hub exists but needs a container registry layer",
-    "nexus-hub should be separated as a surface-world demo shell"
-  ],
-  "privacy_flags": [
-    "private ledgers must not be published in demo repos",
-    "production source code should remain in private repositories"
-  ],
-  "tasks_created": [
-    "Create sanitized container registry sample data",
-    "Add deployment map schema",
-    "Generate public demo audit report"
-  ]
-}
+```
+Nexus Canon        → defines meaning
+Registry           → records declared / observed state
+SunForge           → audits, correlates, detects drift, generates intelligence
+Nexus              → routes
+Containers         → operate
 ```
 
-## Planned Stack
+SunForge **recommends**. It does **not** silently redefine canonical architecture, merge repositories, or act as an unrestricted execution agent.
 
-- Google Cloud Agent Builder
-- Gemini
-- MongoDB MCP Server
-- MongoDB Atlas
-- Google Cloud Run
-- Node.js backend
-- Web dashboard frontend
+## Current Status (Production Continuity Build)
+
+This repository began as a public-safe hackathon demo shell (Gemini + MongoDB MCP track). It has been recovered and hardened into the operational starting point for Methodz ecosystem auditing.
+
+- Rules engine (v0.2 → production path) preserved and extended
+- Sample data retained for public demo and regression tests
+- Backend remains pure Node (no external runtime deps for core audit)
+- Frontend made production-ready (no hardcoded localhost)
+- Health endpoint, audit/run model, security boundaries documented
+- Vercel deployment target prepared
 
 ## Repository Structure
 
 ```text
-app/
-  frontend/
-  backend/
 agent/
   instructions.md
   tools.md
   workflows.md
-data/
-  sample-ecosystem.json
-  sample-repos.json
-  sample-deployments.json
-  sample-rules.json
+app/
+  frontend/          # static dashboard
+  backend/           # Node HTTP server (local) + Vercel-compatible entry
+data/                # sample ecosystem (public demo boundary)
 docs/
   architecture.md
   demo-script.md
-  devpost-submission.md
+  deployment.md
+  security.md
+  audit-run-model.md
+tests/
 ```
 
-## Public Demo Boundary
+## Local Development
 
-This repository is intentionally boring, testable, and safe.
+```bash
+cd app/backend
+npm start
+# Backend: http://localhost:8080
+# Health:  http://localhost:8080/health
+# Audit:   http://localhost:8080/api/audit
+```
 
-It showcases the agent that can manage a larger private ecosystem without exposing that ecosystem's protected code or private internal records.
+Open `app/frontend/index.html` or serve it. The frontend resolves the API via relative path or `window.__SUNFORGE_API__`.
+
+## Production
+
+Deploy as its own Vercel project. See `docs/deployment.md`.
+
+Required environment variables (names only):
+
+- `PORT` (optional)
+- `GITHUB_TOKEN` (optional, server-side only — for live discovery)
+- `SUNFORGE_MODE` (`demo` | `live`)
+
+Never put tokens in frontend code.
+
+## Security
+
+- Default behavior is **read-only**.
+- No secrets in repository.
+- No shell/code execution exposed to the agent surface.
+- CORS and request surface are intentionally narrow.
+- See `docs/security.md`.
+
+## Continuity Rules
+
+This is archaeological recovery, not a greenfield rewrite. Old artifacts are preserved. Drift between documentation and implementation is recorded and resolved against the Registry / Canon authority chain.
 
 ## License
 
